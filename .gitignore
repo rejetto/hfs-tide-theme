@@ -1,0 +1,4 @@
+.DS_Store
+dist/storage/
+ANNOUNCEMENT.md
+screenshots/tide-[0-9]*.png
