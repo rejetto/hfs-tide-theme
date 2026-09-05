@@ -8,9 +8,9 @@ Green is just the default: choose another color and Tide adapts its surfaces, bu
 | ![Tide with the default green main color in light mode](screenshots/tide-green.jpg) | ![Tide with a violet main color configured in admin, in dark mode](screenshots/tide-violet.jpg) |
 
 Two configurations of the same theme. Both colors work in either mode.
-The theme uses pure CSS and system fonts, with no frontend JavaScript, dependencies or external requests.
+The styling uses CSS and system fonts, with no dependencies or external requests. Forcing an appearance adds only a small inline assignment to HFS's native theme override.
 
-- Follows HFS's Light / Dark / Auto preference.
+- **Appearance** in the plugin's admin options defaults to **Automatic (visitor preference)**. Optionally choose **Force light** or **Force dark** for everyone. Reload the file browser after saving. Returning to Automatic restores the visitor's existing preference, or the system theme if none was chosen.
 - Optional main color in Admin → Plugins → Tide → Options; defaults to sea green. Reload the file browser after saving. The chosen color seeds the palette: light/dark shades are adjusted for readable controls, and folder icons keep their gold color.
 - Highlights the entire selected row, with an accent edge.
 - Separates folder icons, filenames and metadata visually.
@@ -48,4 +48,5 @@ HFS_URL=http://127.0.0.1:8097/ node check.cjs
 ```
 
 Use a disposable HFS instance with Tide enabled, at least two entries and a folder.
+To check forced appearance and preservation of visitor preferences, run `HFS_CONFIG=/absolute/path/to/disposable/config.yaml node check-mode.cjs`. This temporarily changes that server's plugin setting and restores its configuration afterward.
 Other browsers and third-party theme combinations have not been verified.
