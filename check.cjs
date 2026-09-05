@@ -46,6 +46,15 @@ async function check() {
                     await page.screenshot({ path: `${process.env.SCREENSHOTS}/tide-${width}-${colorScheme}.png` })
                 }
                 if (width === 1280) {
+                    for (const selector of ['#upload-button', '#zip-button button', '#select-button']) {
+                        const button = page.locator(selector)
+                        await button.evaluate(e => { e.disabled = true })
+                        await button.evaluate(e => Promise.all(e.getAnimations().map(a => a.finished)))
+                        const disabled = await button.evaluate(e => ({ background: getComputedStyle(e).backgroundColor, opacity: getComputedStyle(e).opacity }))
+                        assert.equal(disabled.background, await page.locator('#search-button').evaluate(e => getComputedStyle(e).backgroundColor))
+                        assert(Number(disabled.opacity) < 1, `${selector}: disabled button is not subdued`)
+                        await button.evaluate(e => { e.disabled = false })
+                    }
                     await page.evaluate(() => {
                         for (const type of ['info', 'success', 'warning', 'error'])
                             HFS.toast(type, type, { timeout: 60000 })

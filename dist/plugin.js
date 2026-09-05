@@ -1,4 +1,5 @@
-exports.version = 1
+exports.version = 1.1
+exports.changelog = [{ "version": 1.1, "message": "Disabled toolbar buttons now lose their accent styling and appear subdued instead of standing out." }]
 exports.description = "Tide: a lightweight light/dark theme. Choose the main color in the plugin's admin options; the palette adapts automatically. Clear selection and comfortable touch targets."
 exports.apiRequired = 13
 exports.repo = "rejetto/hfs-tide-theme"
