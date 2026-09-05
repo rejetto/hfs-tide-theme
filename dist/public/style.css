@@ -114,7 +114,6 @@ ul.dir li .entry-panel .icon-button { width: 36px; height: 36px; font-size: .9em
 }
 #menu-bar button { min-height: 44px; border-radius: .7em; }
 #menu-bar > * { min-width: 0; }
-#menu-bar #upload-button:not(.hide-sliding):enabled, #menu-bar #zip-button > button:enabled,
 #menu-bar button.toggled:enabled {
     background: var(--tide-accent);
     color: var(--tide-on-accent);

@@ -46,6 +46,12 @@ async function check() {
                     await page.screenshot({ path: `${process.env.SCREENSHOTS}/tide-${width}-${colorScheme}.png` })
                 }
                 if (width === 1280) {
+                    for (const selector of ['#upload-button', '#zip-button button']) {
+                        assert.equal(await page.locator(selector).evaluate(e => getComputedStyle(e).backgroundColor),
+                            await page.locator('#search-button').evaluate(e => getComputedStyle(e).backgroundColor))
+                    }
+                    assert.notEqual(await page.locator('#select-button').evaluate(e => getComputedStyle(e).backgroundColor),
+                        await page.locator('#search-button').evaluate(e => getComputedStyle(e).backgroundColor))
                     for (const selector of ['#upload-button', '#zip-button button', '#select-button']) {
                         const button = page.locator(selector)
                         await button.evaluate(e => { e.disabled = true })
@@ -54,6 +60,7 @@ async function check() {
                         assert.equal(disabled.background, await page.locator('#search-button').evaluate(e => getComputedStyle(e).backgroundColor))
                         assert(Number(disabled.opacity) < 1, `${selector}: disabled button is not subdued`)
                         await button.evaluate(e => { e.disabled = false })
+                        await button.evaluate(e => Promise.all(e.getAnimations().map(a => a.finished)))
                     }
                     await page.evaluate(() => {
                         for (const type of ['info', 'success', 'warning', 'error'])
@@ -62,7 +69,7 @@ async function check() {
                     await page.locator('.toast').nth(3).waitFor()
                     for (const color of ['#196d56', '#7048e8', '#ffff00', '#ffffff', '#000000']) {
                         const style = await page.addStyleTag({ content: `:root { --tide-theme-color: ${color} }` })
-                        const contrasts = await page.locator('#zip-button button, .toast').evaluateAll(elements => elements.map(button => {
+                        const contrasts = await page.locator('#zip-button button, #select-button, .toast').evaluateAll(elements => elements.map(button => {
                             const css = getComputedStyle(button)
                             const canvas = document.createElement('canvas')
                             canvas.width = canvas.height = 1

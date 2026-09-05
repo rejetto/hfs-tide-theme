@@ -1,5 +1,5 @@
-exports.version = 1.1
-exports.changelog = [{ "version": 1.1, "message": "Disabled toolbar buttons now lose their accent styling and appear subdued instead of standing out." }]
+exports.version = 1.2
+exports.changelog = [{ "version": 1.2, "message": "Upload and Zip now use the same colors as other toolbar actions. Accent styling is reserved for active states." }, { "version": 1.1, "message": "Disabled toolbar buttons now lose their accent styling and appear subdued instead of standing out." }]
 exports.description = "Tide: a lightweight light/dark theme. Choose the main color in the plugin's admin options; the palette adapts automatically. Clear selection and comfortable touch targets."
 exports.apiRequired = 13
 exports.repo = "rejetto/hfs-tide-theme"
